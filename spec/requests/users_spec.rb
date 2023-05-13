@@ -12,6 +12,11 @@ RSpec.describe 'Users', type: :request do
 
       expect(response).to render_template(:index)
     end
+
+    it "response body includes the text 'index'" do
+      get users_path
+      expect(response.body).to include('index')
+    end
   end
 
   describe 'GET /show' do
@@ -27,6 +32,11 @@ RSpec.describe 'Users', type: :request do
       get user_path(user.id)
 
       expect(response).to render_template(:show)
+    end
+
+    it "response body includes the text 'show user'" do
+      get user_path(user.id)
+      expect(response.body).to include('show user')
     end
   end
 end
