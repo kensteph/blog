@@ -8,11 +8,11 @@
     </div>
   </div>
 
-  <% if display %>
-  <div class="comments">
-    <h4>Comments</h4>
-    <%= render partial: 'posts/comment', collection: post.last_5_comments, as: :comment %>
-  </div>
-  <% end %>
+    <% if display %>
+    <div class="comments">
+      <h4>Comments</h4>
+      <%= render partial: 'posts/comment', collection: post.last_5_comments, as: :comment %>
+    </div>
+    <% end %>
   <% end %>
 </div>
