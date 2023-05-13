@@ -1,1 +1,6 @@
-<p>index</p>
+<section class="layout-container ">
+    <%= render @user %>
+    <div class="posts">
+      <%= render partial: 'users/post', collection: @posts, locals: {display: true} %>
+    </div>
+  </section>
