@@ -1,0 +1,18 @@
+<div class="post-comment">
+<%= link_to user_post_path(post.author, post) do %>
+  <div class="post">
+    <h4><%= post.title %></h4>
+    <%= post.text %>
+    <div class="post-stat">
+      Comments: <%= post.comments_counter %> | Likes: <%= post.likes_counter %>
+    </div>
+  </div>
+
+  <% if display %>
+  <div class="comments">
+    <h4>Comments</h4>
+    <%= render partial: 'posts/comment', collection: post.last_5_comments, as: :comment %>
+  </div>
+  <% end %>
+  <% end %>
+</div>
