@@ -11,7 +11,7 @@
     <% if display %>
     <div class="comments">
       <h4>Comments</h4>
-      <%= render partial: 'users/posts/comment', collection: post.last_5_comments, as: :comment %>
+      <%= render partial: 'users/posts/comment', collection: post.comments.last(5), as: :comment %>
     </div>
     <% end %>
   <% end %>
