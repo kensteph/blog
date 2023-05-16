@@ -1,7 +1,7 @@
 <div class="layout-container">
   <div class="full-post">
     <div class="post-title">
-      <h3>Post by  <%= @post.author.name%> </h3>
+      <h3><%= @post.title %> by  <%= @post.author.name%> </h3>
       <div>
         Comment: <%= @post.comments_counter %> | Likes: <%= @post.likes_counter %>
       </div>

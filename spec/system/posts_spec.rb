@@ -8,6 +8,7 @@ RSpec.describe Post, type: :system do
   let(:post_2) { Post.new(author: user, title: 'This is a title 3', likes_counter: 0, comments_counter: 0) }
   let(:post_3) { Post.new(author: user, title: 'This is a title 4', likes_counter: 0, comments_counter: 0) }
   let(:comment) { Comment.new(text: 'This is the comment #0', post: subject, author: user)}
+  let(:comment_2) { Comment.new(text: 'This is the comment #1', post: subject, author: kender)}
 
   before { subject.save }
   before { kender.save }
@@ -16,6 +17,7 @@ RSpec.describe Post, type: :system do
   before {post_2.save}
   before {post_3.save}
   before {comment.save}
+  before {comment_2.save}
 
   # INDEX PAGE CAPYBARA
   describe 'index page' do
@@ -59,6 +61,38 @@ RSpec.describe Post, type: :system do
       visit "/users/#{user.id}/posts" # Visit the user index page
       find("#show-post-#{subject.id}", text: subject.title).click # Click on the user's link
       expect(page).to have_current_path("/users/#{user.id}/posts/#{subject.id}", ignore_query: true) # Verify the redirection to user show page
+    end
+  end
+
+  # SHOW PAGE CAPYBARA
+   describe 'show page' do
+    it 'Show the post title on posts#show' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page).to have_content subject.title
+    end
+    it 'shows the User name who owns the post' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page).to have_content(user.name)
+    end
+    it 'Show the number of comments of a post on posts#index' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page.find(".post-title")).to have_content subject.comments_counter.to_s
+    end
+    it 'Show the number of likes of a post on posts#index' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page.find(".post-title")).to have_content subject.likes_counter.to_s
+    end
+    it 'Show the number of comments of a post on posts#index' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page.find(".post-text")).to have_content subject.text
+    end
+    it 'Show the name of the comment owner of a post on posts#index' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page.find("#comment-#{comment.id}")).to have_content user.name
+    end
+    it 'Show the text of the comment of a post on posts#index' do
+      visit "/users/#{user.id}/posts/#{subject.id}"
+      expect(page.find("#comment-#{comment.id}")).to have_content comment.text
     end
   end
 end
