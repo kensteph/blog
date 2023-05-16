@@ -90,6 +90,10 @@ To run the project, execute the following command:
 
 ## 👥 Authors <a name="authors"></a>
 
+👤 **Nelson Araujo**
+
+- GitHub: [@luis-pomare](https://github.com/NelsonAraujo93)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/nelson-araujo-paredes/)
 
 👤 **Kender Romain**
 
