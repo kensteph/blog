@@ -4,6 +4,9 @@
       <%= render partial: 'users/post', collection: @posts, locals: {display: true} %>
     </div>
    
+    <div class="all-posts">
+      <span class="all-btn">Pagination</span>
+    </div>
     <%= link_to 'New Post', new_user_post_path(@user), class: "btn" %>
     
   </section>

@@ -3,7 +3,7 @@
   <div class="post">
     <h4><%= post.title %></h4>
     <%= post.text %>
-    <div class="post-stat">
+    <div id='<%= "comments-likes-#{post.id}" %>' class="post-stat">
       Comments: <%= post.comments_counter %> | Likes: <%= post.likes_counter %>
     </div>
   </div>
