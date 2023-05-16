@@ -1,5 +1,5 @@
 <div class="post-comment">
-<%= link_to user_post_path(post.author, post) do %>
+<%= link_to user_post_path(post.author, post) ,id: "show-post-#{post.id}" do %>
   <div class="post">
     <h4><%= post.title %></h4>
     <%= post.text %>
