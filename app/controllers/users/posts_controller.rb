@@ -14,13 +14,16 @@ class Users::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.author = current_user
-
-    if @post.save
-      redirect_to user_posts_path(user_id: params[:user_id].to_i)
-    else
-      render 'new'
+    @new_post = Post.new(params.require(:post).permit(:text, :title))
+    @new_post.author = current_user
+    @new_post.likes_counter = 0
+    @new_post.comments_counter = 0
+    respond_to do |format|
+      if @new_post.save
+        format.html { redirect_to "/users/#{current_user.id}/posts", notice: 'Post was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
