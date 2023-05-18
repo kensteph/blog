@@ -31,7 +31,7 @@ class Users::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = User.find(params[:user_id])
     @post.destroy
-    @user.posts_counter -=1
+    @user.posts_counter -= 1
     @user.save
     flash[:notice] = "Post #{@post.id} was successfully deleted for user : #{@user.name}!"
     redirect_to "/users/#{params[:user_id]}/posts"
