@@ -5,17 +5,19 @@ class Ability
     return unless user.present?
 
     can :read, :all
-    can :delete, Post do |post|
+    can :create, :all
+    can :destroy, Post do |post|
       post.author == user
     end
-    can :delete, Comment do |comment|
+
+    can :destroy, Comment do |comment|
       comment.author == user
     end
 
     return unless user.role == 'admin'
 
     can :manage, :all
-    can :delete, Post
-    can :delete, Comment
+    can :destroy, Post
+    can :destroy, Comment
   end
 end

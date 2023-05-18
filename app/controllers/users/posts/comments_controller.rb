@@ -1,4 +1,5 @@
 class Users::Posts::CommentsController < ApplicationController
+  load_and_authorize_resource
   def new
     @comment = Comment.new
     @post = Post.find { |post| post.id == params[:post_id].to_i }
