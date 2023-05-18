@@ -37,7 +37,6 @@ class Users::PostsController < ApplicationController
     redirect_to "/users/#{params[:user_id]}/posts"
   end
 
-
   private
 
   def post_params

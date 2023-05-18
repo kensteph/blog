@@ -17,6 +17,19 @@ class Users::Posts::CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.includes({ post: :author }).find(params[:id])
+    @post = @comment.post
+    @user = @post.author
+    @post.comments_counter -= 1
+    @user.posts_counter -= 1
+    @comment.destroy
+    @post.save
+    @user.save
+    flash[:notice] = "Comment #{@comment.id} was successfully deleted for post : #{@post.title}!"
+    redirect_to "/users/#{@post.author.id}/posts/#{@post.id}"
+  end
+
   private
 
   def comment_params
