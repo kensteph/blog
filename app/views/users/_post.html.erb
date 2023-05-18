@@ -15,4 +15,7 @@
     </div>
     <% end %>
   <% end %>
+  <% if can? :destroy, post %>
+  <%= link_to 'Delete Post', user_post_path(post.author, post), 'data-turbo-method': :delete, data: { confirm: "Are you sure?"} %>
+  <% end %>
 </div>

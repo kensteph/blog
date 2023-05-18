@@ -1,4 +1,5 @@
 class Users::PostsController < ApplicationController
+  load_and_authorize_resource
   def index
     @user = User.includes({ posts: :author }, { posts: { comments: :author } }).find(params[:user_id])
     @posts = @user.posts
@@ -25,6 +26,16 @@ class Users::PostsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @user = User.find(params[:user_id])
+    @post.destroy
+    @user.posts_counter -= 1
+    @user.save
+    flash[:notice] = "Post #{@post.id} was successfully deleted for user : #{@user.name}!"
+    redirect_to "/users/#{params[:user_id]}/posts"
   end
 
   private
