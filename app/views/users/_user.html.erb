@@ -1,11 +1,13 @@
-<%= link_to user_path(user) do %>
-  <div class="user">
-    <div class="user-img-wrapper">
-      <%= image_tag user&.photo, class: 'user-img' ,id: "user-#{user.id}" %>
-    </div>
-    <div class="user-infos">
-      <h2 class="user-name"><span><%= user&.name %></span></h2>
-      <p class="post-counter" id='<%= "counter-#{user.id}"%>'>Number of posts: <%= user&.posts_counter  %></p>
-    </div>
+<div class="user">
+  <div class="user-img-wrapper">
+    <%= image_tag user&.photo, class: 'user-img' ,id: "user-#{user.id}" %>
   </div>
-<% end %>
+  <div class="user-infos">
+    <div>
+    <h2 class="user-name"><span><%= user&.name %></span></h2>
+    <strong>Token : </strong><span><%= user&.user_token %></span>
+      <br><%= link_to 'View Post', user_path(user) %>
+    </div>
+    <p class="post-counter" id='<%= "counter-#{user.id}"%>'>Number of posts: <%= user&.posts_counter  %></p>
+  </div>
+</div>
